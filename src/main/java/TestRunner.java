@@ -1,13 +1,14 @@
 import service.ReconciliationService;
+import service.WorkflowService;
 
 public class TestRunner {
 
     public static void main(String[] args) {
 
-        ReconciliationService service = new ReconciliationService();
+        WorkflowService wf = new WorkflowService();
 
-        service.reconcile("SKU-1", "WH-1", "system");
+        wf.changeStatus(1, "IN_REVIEW", "ops_user", "Investigating variance");
 
-        System.out.println("Reconciliation finished.");
+        System.out.println("Status changed.");
     }
 }

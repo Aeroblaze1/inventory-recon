@@ -92,4 +92,61 @@ public class DiscrepancyDao {
             ps.executeUpdate();
         }
     }
+
+    public InventoryDiscrepancy findById(Connection conn, long id) throws Exception {
+
+        String sql = "SELECT * FROM inventory_discrepancy WHERE id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if (!rs.next()) return null;
+
+            return mapRow(rs);
+        }
+    }
+
+    public void updateStatus(Connection conn, long id, String status) throws Exception {
+
+        String sql =
+                "UPDATE inventory_discrepancy " +
+                        "SET status = ? WHERE id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, status);
+            ps.setLong(2, id);
+            ps.executeUpdate();
+        }
+    }
+
+    public void deactivate(Connection conn, long id) throws Exception {
+
+        String sql =
+                "UPDATE inventory_discrepancy " +
+                        "SET active_flag = false WHERE id = ?";
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setLong(1, id);
+            ps.executeUpdate();
+        }
+    }
+
+
+    //privatre mapper helper
+    private InventoryDiscrepancy mapRow(ResultSet rs) throws Exception {
+
+        InventoryDiscrepancy d = new InventoryDiscrepancy();
+        d.setId(rs.getLong("id"));
+        d.setSku(rs.getString("sku"));
+        d.setWarehouseId(rs.getString("warehouse_id"));
+        d.setExpectedQuantity(rs.getInt("expected_quantity"));
+        d.setActualQuantity(rs.getInt("actual_quantity"));
+        d.setDifference(rs.getInt("difference"));
+        d.setStatus(rs.getString("status"));
+        d.setActive(rs.getBoolean("active_flag"));
+
+        return d;
+    }
+
 }
