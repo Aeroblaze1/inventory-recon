@@ -5,10 +5,17 @@ public class TestRunner {
 
     public static void main(String[] args) {
 
-        WorkflowService wf = new WorkflowService();
+//        WorkflowService wf = new WorkflowService();
+//
+//        wf.changeStatus(1, "IN_REVIEW", "ops_user", "Investigating variance");
+//
+//        System.out.println("Status changed.");
 
-        wf.changeStatus(1, "IN_REVIEW", "ops_user", "Investigating variance");
 
-        System.out.println("Status changed.");
+        ReconciliationService service = new ReconciliationService();
+
+        service.reconcile("SKU-1", "WH-1", "system");
+
+        System.out.println("Reconciliation finished.");
     }
 }

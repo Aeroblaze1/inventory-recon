@@ -17,4 +17,25 @@
         <url-pattern>/health</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DiscrepancyListServlet</servlet-name>
+        <servlet-class>servlet.DiscrepancyListServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DiscrepancyListServlet</servlet-name>
+        <url-pattern>/discrepancies</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>WorkflowActionServlet</servlet-name>
+        <servlet-class>servlet.WorkflowActionServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>WorkflowActionServlet</servlet-name>
+        <url-pattern>/workflow</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

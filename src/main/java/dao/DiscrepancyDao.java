@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DiscrepancyDao {
 
@@ -130,6 +132,31 @@ public class DiscrepancyDao {
             ps.setLong(1, id);
             ps.executeUpdate();
         }
+    }
+    public List<InventoryDiscrepancy> findAllActive(Connection conn) throws Exception {
+
+        String sql = "SELECT * FROM inventory_discrepancy WHERE active_flag = true";
+
+        List<InventoryDiscrepancy> list = new ArrayList<>();
+
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                InventoryDiscrepancy d = new InventoryDiscrepancy();
+                d.setId(rs.getLong("id"));
+                d.setSku(rs.getString("sku"));
+                d.setWarehouseId(rs.getString("warehouse_id"));
+                d.setExpectedQuantity(rs.getInt("expected_quantity"));
+                d.setActualQuantity(rs.getInt("actual_quantity"));
+                d.setDifference(rs.getInt("difference"));
+                d.setStatus(rs.getString("status"));
+                d.setActive(rs.getBoolean("active_flag"));
+                list.add(d);
+            }
+        }
+
+        return list;
     }
 
 
