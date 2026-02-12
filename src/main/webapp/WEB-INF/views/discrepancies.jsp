@@ -28,7 +28,12 @@
                     (model.InventoryDiscrepancy) obj;
     %>
     <tr>
-        <td><%= d.getId() %></td>
+        <td>
+            <a href="discrepancy?id=<%= d.getId() %>">
+                <%= d.getId() %>
+            </a>
+        </td>
+
         <td><%= d.getSku() %></td>
         <td><%= d.getWarehouseId() %></td>
         <td><%= d.getExpectedQuantity() %></td>

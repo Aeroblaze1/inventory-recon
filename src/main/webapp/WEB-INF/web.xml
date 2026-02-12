@@ -37,5 +37,14 @@
         <url-pattern>/workflow</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>DiscrepancyDetailServlet</servlet-name>
+        <servlet-class>servlet.DiscrepancyDetailServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>DiscrepancyDetailServlet</servlet-name>
+        <url-pattern>/discrepancy</url-pattern>
+    </servlet-mapping>
 
 </web-app>
